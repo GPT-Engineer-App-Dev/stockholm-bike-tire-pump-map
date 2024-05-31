@@ -1,6 +1,16 @@
 import { Container, Text, VStack } from "@chakra-ui/react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+// Define custom icon
+const bikePumpIcon = new L.Icon({
+  iconUrl: require("../../public/images/bike-pump.png"),
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 const bikePumpStations = [
   { lat: 59.3293, lng: 18.0686, name: "Central Station" },
@@ -20,7 +30,7 @@ const Index = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {bikePumpStations.map((station, index) => (
-            <Marker key={index} position={[station.lat, station.lng]}>
+            <Marker key={index} position={[station.lat, station.lng]} icon={bikePumpIcon}>
               <Popup>{station.name}</Popup>
             </Marker>
           ))}
